@@ -17,15 +17,15 @@ def connectionLoop(sock):
       # Listen to next message
       data, addr = sock.recvfrom(1024)
       data = str(data)
-      data = json.loads(data)
+      #data = json.loads(data)
       print(data)
       # if the address is already in clients,
       if addr in clients:
          # update heartbeat if it has one
          if 'heartbeat' in data:
             clients[addr]['lastBeat'] = datetime.now()
-         if 'updateposition' in data:
-            clients[addr]['position'] = data['position']
+         #if 'updateposition' in data:
+            #clients[addr]['position'] = data['position']
       else:
          # if the address is new
          if 'connect' in data:
