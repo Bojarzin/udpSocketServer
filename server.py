@@ -24,8 +24,8 @@ def connectionLoop(sock):
          # update heartbeat if it has one
          if 'heartbeat' in data:
             clients[addr]['lastBeat'] = datetime.now()
-         #if 'updateposition' in data:
-            #clients[addr]['position'] = data['position']
+         if 'updateposition' in data:
+            clients[addr]['position'] = data['position']
       else:
          # if the address is new
          if 'connect' in data:
@@ -118,13 +118,21 @@ def gameLoop(sock):
          # For each client, create a player
          player = {}
          # Get a random colour
-        # clients[c]['color'] = {"R": random.random(), "G": random.random(), "B": random.random()}
+         clients[c]['color'] = {"R": random.random(), "G": random.random(), "B": random.random()}
          # Give a position
-         #clients[c]['position'] = {"X": 0, "Y": 0, "Z": 0}
+         clients[c]['position'] = {"X": 0, "Y": 0, "Z": 0}
          # Give new player the ID and colour, add it to GameState
+         
+         #clients[c]['color'] = {
+          #  "R": random.random(),
+          #  "G": random.random(),
+          #  "B": random.random()
+         #}
+         
          player['id'] = str(c)
          player['color'] = clients[c]['color']
          player['position'] = clients[c]['position']
+
          GameState['players'].append(player)
       s=json.dumps(GameState)
       # print(s)
